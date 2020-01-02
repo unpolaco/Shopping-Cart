@@ -2,8 +2,10 @@ class App extends React.Component {
 
   state = {
     cartItems: 0,
-    availableItems: 7,
+    availableItems: 11,
   }
+  
+
   handleIncrement = () => {
   this.setState({ cartItems: this.state.cartItems + 1 })
 }
@@ -12,18 +14,21 @@ class App extends React.Component {
 }
   handleBuy = () => {
     this.setState({ availableItems: this.state.availableItems - this.state.cartItems})
-      this.setState({ cartItems: 0 })
-    
+      this.setState({ cartItems: 0 }) 
   }
 
   render() {
+    
     return (
-      <div>
+      <div className="wrapper">
+      <div className="cartButtons">
+        <button onClick={this.handleDecrement} disabled={this.state.cartItems=== 0 ? true : false}>-</button>
+        <div className="number">{this.state.cartItems}</div>
+        <button onClick={this.handleIncrement} disabled={this.state.availableItems === this.state.cartItems}>+</button>
+        <button onClick={this.handleBuy}>Kup teraz</button>
+      </div>
       
-      <button onClick={this.handleDecrement} disabled={this.state.cartItems=== 0 ? true : false}>-</button>
-      <span>  {this.state.cartItems}  </span>
-      <button onClick={this.handleIncrement} disabled={this.state.availableItems === this.state.cartItems}>+</button>
-      <button onClick={this.handleBuy}>Kup teraz</button>
+      <p>Dostępne produkty: {this.state.availableItems}</p>
       </div>
     )
   }
